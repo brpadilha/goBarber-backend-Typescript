@@ -15,6 +15,8 @@ usersRouter.post('/', async (request, response) => {
       password,
     }); //enviando para o service os dados vindo do request
 
+    delete user.password;
+
     return response.status(200).json(user);
   } catch (error) {
     return response.status(400).json({ error: error.message });
