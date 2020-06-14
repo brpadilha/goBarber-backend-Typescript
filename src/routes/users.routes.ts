@@ -8,8 +8,6 @@ import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 const usersRouter = Router();
 const upload = multer(uploadConfig);
 
-usersRouter.use(ensureAuthenticated); //fazer com que a rota aceite o middleware
-
 usersRouter.post('/', async (request, response) => {
   try {
     const { name, email, password } = request.body;
@@ -30,6 +28,7 @@ usersRouter.post('/', async (request, response) => {
   }
 });
 
+usersRouter.use(ensureAuthenticated); //fazer com que a rota aceite o middleware
 usersRouter.patch(
   '/avatar',
   ensureAuthenticated,
