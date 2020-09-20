@@ -8,7 +8,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-import User from './User';
+import User from '../../../../users/infra/typeorm/entities/User';
 
 @Entity('appointments') // estamos indicando que o model de appointments vai ser armazenado dentro da tabela de appointments
 class Appointment {
@@ -18,9 +18,9 @@ class Appointment {
   @Column()
   provider_id: string;
 
-  @ManyToOne(() => User) //Pode ter muitos agendamentos em um usuário provider
-  @JoinColumn({ name: 'provider_id' }) //Mostrando qual coluna do usuário está relacionado
-  provider: User; //Mostrando qual é o Model que está sendo feito o relacionamento
+  @ManyToOne(() => User) // Pode ter muitos agendamentos em um usuário provider
+  @JoinColumn({ name: 'provider_id' }) // Mostrando qual coluna do usuário está relacionado
+  provider: User; // Mostrando qual é o Model que está sendo feito o relacionamento
 
   @Column('timestamp with time zone')
   date: Date;

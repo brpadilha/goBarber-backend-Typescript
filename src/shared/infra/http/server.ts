@@ -5,10 +5,10 @@ import cors from 'cors';
 
 import 'express-async-errors';
 import routes from './routes'; // importando as rotas
-import uploadConfig from './config/upload';
+import uploadConfig from '../../../config/upload';
 
-import './database/index';
-import AppError from './errors/AppError';
+import '../typeorm/index';
+import AppError from '../../errors/AppError';
 
 const app = express();
 
