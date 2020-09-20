@@ -10,7 +10,6 @@ const upload = multer(uploadConfig);
 
 usersRouter.post('/', async (request, response) => {
   const { name, email, password } = request.body;
-  console.log('aqui');
 
   const createUser = new CreateUserService(); // criando a variável createUser referenciando o service
 

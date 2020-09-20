@@ -14,7 +14,6 @@ class CreateUserService {
   public async execute({ name, password, email }: Request): Promise<User> {
     // criando a função create
     const userRepository = getRepository(User);
-
     const checkUserExists = await userRepository.findOne({
       where: {
         email,
