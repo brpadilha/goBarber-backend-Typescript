@@ -1,15 +1,16 @@
 import { Router } from 'express'; // importando o router
 import multer from 'multer';
-import uploadConfig from '../../../../config/upload';
-import CreateUserService from '../../../../modules/users/services/CreateUserService';
-import UpdateUserAvatarService from '../../../../modules/users/services/UpdateUserAvatarService';
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
+import uploadConfig from '@config/upload';
+import CreateUserService from '@modules/users/services/CreateUserService';
+import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
 
 const usersRouter = Router();
 const upload = multer(uploadConfig);
 
 usersRouter.post('/', async (request, response) => {
   const { name, email, password } = request.body;
+  console.log('aqui');
 
   const createUser = new CreateUserService(); // criando a variável createUser referenciando o service
 

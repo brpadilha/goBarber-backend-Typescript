@@ -1,7 +1,7 @@
 import { Router } from 'express'; // importando rotas
-import appointmentsRouter from './appointments.routes';
-import userRouter from './users.routes';
-import sessionsRouter from './sessions.routes';
+import appointmentsRouter from '@modules/appointments/infra/http/appointments.routes';
+import userRouter from '@modules/users/infra/http/users.routes';
+import sessionsRouter from '@modules/users/infra/http/sessions.routes';
 
 const routes = Router(); // criando a constante rotas
 
