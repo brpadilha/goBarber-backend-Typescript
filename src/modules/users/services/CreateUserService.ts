@@ -1,4 +1,6 @@
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import { inject, injectable } from 'tsyringe';
+
 import { hash } from 'bcryptjs';
 import AppError from '@shared/errors/AppError';
 
@@ -9,9 +11,12 @@ interface IRequest {
   password: string;
   email: string;
 } // criando a interface dos tipos que iremos receber no Request
-
+@injectable()
 class CreateUserService {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
+  ) {}
 
   public async execute({ name, password, email }: IRequest): Promise<User> {
     // criando a função create
