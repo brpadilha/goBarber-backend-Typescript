@@ -24,8 +24,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev -r tsconfig-paths/register --transpileOnly --inspect --ignore node_modules src/shared/infra/http/server.ts",
-    "start": "ts-node tsconfig-paths/register src/shared/infra/http/server.ts",
-    "typeorm": "ts-node-dev tsconfig-paths/register ./node_modules/typeorm/cli.js"
+    "start": "ts-node  src/shared/infra/http/server.ts",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
