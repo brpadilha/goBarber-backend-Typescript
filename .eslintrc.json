@@ -24,6 +24,7 @@
     "prettier"
   ],
   "rules": {
+    "import/order": "off",
     "prettier/prettier": "error",
     "import/extensions": [
       "error",

@@ -9,8 +9,8 @@ import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
 import routes from './routes'; // importando as rotas
 
+import '@shared/container';
 import '@shared/infra/typeorm/index';
-import '@shared/container/index';
 
 const app = express();
 

@@ -1,6 +1,7 @@
-import { startOfDay } from 'date-fns';
-import { inject, injectable } from 'tsyringe';
+// import 'reflect-metadata';
+import { startOfHour } from 'date-fns';
 import AppError from '@shared/errors/AppError';
+import { injectable, inject } from 'tsyringe';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 import Appointment from '../infra/typeorm/entities/Appointment';
@@ -17,7 +18,7 @@ class CreateAppointmentService {
   ) {}
 
   public async execute({ date, provider_id }: IRequest): Promise<Appointment> {
-    const appointmentDate = startOfDay(date);
+    const appointmentDate = startOfHour(date);
 
     const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
       appointmentDate,
