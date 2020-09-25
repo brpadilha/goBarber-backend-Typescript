@@ -16,7 +16,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use('/files', express.static(uploadConfig.directory)); // acessar ao file com um endereço estático
+app.use('/files', express.static(uploadConfig.tmpFolder)); // acessar ao file com um endereço estático
 app.use(routes);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {

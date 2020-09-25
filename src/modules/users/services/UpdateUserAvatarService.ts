@@ -1,12 +1,9 @@
-import fs from 'fs';
-
-import path from 'path';
 import AppError from '@shared/errors/AppError';
 
-import uploadConfig from '@config/upload';
 import User from '@modules/users/infra/typeorm/entities/User';
 import { inject, injectable } from 'tsyringe';
 import IUsersRepository from '../repositories/IUsersRepository';
+import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
 
 interface IRequest {
   user_id: string;
@@ -18,6 +15,9 @@ class UpdateUserAvatarService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('StorageProvider')
+    private storageProvider: IStorageProvider,
   ) {}
 
   public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
@@ -28,15 +28,12 @@ class UpdateUserAvatarService {
     }
 
     if (user.avatar) {
-      const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar); // juntando o arquivo pelo outro
-      const userAvatarFileExists = await fs.promises.stat(userAvatarFilePath); // verifica se o avatar já existe com o fs.
-
-      if (userAvatarFileExists) {
-        await fs.promises.unlink(userAvatarFilePath); // deslinkando o avatar existente com o usuário
-      }
+      await this.storageProvider.deleteFile(user.avatar);
     }
 
-    user.avatar = avatarFilename;
+    const fileName = await this.storageProvider.saveFile(avatarFilename);
+
+    user.avatar = fileName;
 
     await this.usersRepository.save(user); // atualizando as mudanças que a gente fez
     return user;
